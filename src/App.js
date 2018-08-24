@@ -1,56 +1,50 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Provider } from 'react-redux';
-
-import { connect } from "react-redux";
+import { Provider, connect } from 'react-redux';
 
 import store from './store';
+import Posts from './containers/Posts';
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    console.log("props : ", props)
-  }
-  componentDidMount(){
-    console.log("state", this.state)
-  }
-  componentWillReceiveProps(nextProps){
-    console.log("nxt", nextProps)
-  }
+ 
+ 
   render() {
-    const { items, status, onRequestData } = this.props;
+    //const { rows, status, onRequestData } = this.props;
     return (
       <Provider store={store}>
         <div className="App">
-          <button onClick={onRequestData}>Request Data</button>
-          <div>
-            <span>{status}</span>
-            { Array.isArray(items) ? items.map(function(item){
-              {item}
-            }): "nada" }
-          </div>
+         <Posts />
         </div>
       </Provider>
     );
   }
 }
 
+// const mapStateToProps = state => {
+//   return {
+//     rows: state.posts.items,
+//     status: state.posts.status
+//   }
+// };
 
-const mapStateToProps = state => {
-  return {
-    items: state.items,
-    status: state.status
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onRequestData: () => {
+//       return dispatch({ type: "FETCH_POSTS" })
+//     }
+//   }
+// };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onRequestData: () => {
-      console.log("dispatching fetch posts now");
-      return dispatch({ type: "FETCH_POSTS" })
-    }
-  }
-};
+// const mapStateToProps = state => {
+//   return {
+//   }
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// const mapDispatchToProps = dispatch => {
+//   return {
+//   }
+// };
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default App;
